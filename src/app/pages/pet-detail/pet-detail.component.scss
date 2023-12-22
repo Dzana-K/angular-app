@@ -1,0 +1,21 @@
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.5); /* Adjust the background color and opacity */
+    backdrop-filter: blur(8px); /* Adjust the blur amount */
+  }
+  
+  /* Additional styling for the modal container */
+  .mat-mdc-dialog-container {
+    transform: translate(-50%, -50%) !important;
+    border-radius: 10px; /* Add rounded corners if desired */
+    overflow: hidden; /* Prevent content from overflowing */
+    position: fixed; /* Ensure that the position is fixed for proper centering */
+    top: 50%;
+    left: 50%;
+    max-width: calc(100% - 20px); /* Adjust the maximum width if needed */
+    max-height: calc(100% - 20px); /* Adjust the maximum height if needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  

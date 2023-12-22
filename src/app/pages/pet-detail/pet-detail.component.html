@@ -1,0 +1,17 @@
+<div *ngIf="animalDetails">
+  
+  <button *ngIf="animalDetails.user_id === authenticatedUserId" (click)="deletePost(animalDetails.id)">Delete Post</button>
+    <h2>{{ animalDetails.name }}</h2>
+    <p>Gender: {{ animalDetails.gender }}</p>
+    <p>Weight: {{ animalDetails.weight }}</p>
+    <!-- Add other details as needed -->
+  
+    <div *ngIf="animalDetails.photos && animalDetails.photos.length > 0">
+      <h3>Photos</h3>
+      <div *ngFor="let photo of animalDetails.photos">
+        <img [src]="'http://127.0.0.1:5000' + photo" alt="Animal Photo" />
+      </div>
+    </div>
+  </div>
+  <button (click)="openAdoptionModal()">Adopt this Pet</button>  
+  

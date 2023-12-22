@@ -1,0 +1,22 @@
+<div *ngIf="user">
+  
+    
+    <h2>{{ user.first_name }}</h2>
+    <p>last_name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <!-- Add other details as needed -->
+
+    <div *ngFor="let animal of animals">
+        
+        <h2>{{ animal.name }}</h2>
+        <p>Gender: {{ animal.gender }}</p>
+        <p>Weight: {{ animal.weight }}</p>
+        <p>City: {{ animal.city }}</p>
+        <p>Country: {{ animal.country }}</p>
+        <a [routerLink]="['/pet/detail',animal.id]">
+            <div *ngFor="let photo of animal.photos">
+            <img [src]="'http://127.0.0.1:5000' + photo" alt="Animal Photo">
+            </div>
+        </a>
+    </div>
+    

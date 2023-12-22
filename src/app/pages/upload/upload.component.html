@@ -1,0 +1,36 @@
+<!-- pet.component.html -->
+
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name" />
+  
+    <label for="gender">Gender:</label>
+    <input type="text" id="gender" formControlName="gender" />
+  
+    <label for="weight">Weight:</label>
+    <input type="text" id="weight" formControlName="weight" />
+  
+    <label for="color">Color:</label>
+    <input type="text" id="color" formControlName="color" />
+  
+    <label for="age">Age:</label>
+    <input type="text" id="age" formControlName="age" />
+  
+    <label for="breed">Breed:</label>
+    <input type="text" id="breed" formControlName="breed" />
+  
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description"></textarea>
+  
+    <label for="city">City:</label>
+    <input type="text" id="city" formControlName="city" />
+  
+    <label for="country">Country:</label>
+    <input type="text" id="country" formControlName="country" />
+  
+    <label for="photos">Photos:</label>
+    <input type="file" id="photos" (change)="onFileChange($event)" type="file" multiple accept="image/*" />
+  
+    <button type="submit">Upload Pet</button>
+  </form>
+  

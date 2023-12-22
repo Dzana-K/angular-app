@@ -1,0 +1,18 @@
+<p>works</p>
+<div *ngFor="let favorite of favorites">
+    <button (click)="deleteFavorites(favorite.animal.id)">Remove from favorites</button>
+    <p>{{ favorite.animal.id }}</p>
+    <h2>{{ favorite.animal.name }}</h2>
+    <p>Gender: {{ favorite.animal.gender }}</p>
+    <p>Weight: {{ favorite.animal.weight }}</p>
+    <p>City: {{ favorite.animal.city }}</p>
+    <p>Country: {{ favorite.animal.country }}</p>
+    <div *ngFor="let photo of favorite.animal.photos">
+        <p>Photos: {{photo}}</p>
+    </div >
+    <a [routerLink]="['/pet/detail',favorite.animal.id]">
+        <div *ngFor="let photo of favorite.animal.photos">
+        <img [src]="'http://127.0.0.1:5000' + photo" alt="Animal Photo">
+        </div>
+    </a>
+  </div>

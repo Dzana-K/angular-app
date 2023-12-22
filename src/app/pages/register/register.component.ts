@@ -1,18 +1,19 @@
 import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { AuthService } from '../../core/api/api/auth.service';
-import { Subscription } from 'rxjs';
 import { AlertComponent } from '../../shared/alert/alert.component';
+import { Subscription } from 'rxjs';
 import { PlaceholderDirective } from '../../shared/placeholder/placeholder.directive';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl:'./login.component.html'
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
-export class LoginComponent {
+export class RegisterComponent {
   error:string | undefined;
   formData = {
-    email: '',
+    username: '',
     password: ''
   };
   @ViewChild(PlaceholderDirective, { static: false }) alertHost!: PlaceholderDirective; 
@@ -21,7 +22,7 @@ export class LoginComponent {
 
   onSubmit() {
     console.log(this.formData)
-    this.authService.login(this.formData).subscribe(
+    this.authService.register(this.formData).subscribe(
       response => {
         this.authService.saveAccessToken(
           response.access_token,
@@ -31,9 +32,8 @@ export class LoginComponent {
           response.refresh_token,
 
         );
-        this.authService.saveUserId(response.user_id);
         this.router.navigate(['/dashboard']);
-        console.log('Login successful', response);
+        console.log('Register successful', response);
         // Handle success, e.g., redirect to another page
       },
       error => {
@@ -44,10 +44,7 @@ export class LoginComponent {
     );
   }
   private showErrorAlert(message: string) {
-    if (!this.alertHost || !this.alertHost.viewContainerRef) {
-      console.error('Alert host or view container ref is not initialized.');
-      return;
-    }
+    
     const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent)
     const hostViewContainerRef = this.alertHost.viewContainerRef
     hostViewContainerRef.clear()

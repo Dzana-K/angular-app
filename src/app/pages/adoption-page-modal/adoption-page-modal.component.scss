@@ -1,0 +1,15 @@
+/* adoption-page-modal.component.scss */
+
+/* Blurred backdrop */
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.5); /* Adjust the background color and opacity */
+    backdrop-filter: blur(8px); /* Adjust the blur amount */
+  }
+  
+  /* Additional styling for the modal container */
+  .mat-dialog-container {
+    transform: translate(-50%, -50%) !important;
+    border-radius: 10px; /* Add rounded corners if desired */
+    overflow: hidden; /* Prevent content from overflowing */
+  }
+  
