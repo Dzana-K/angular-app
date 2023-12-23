@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -9,8 +9,17 @@ export class PetService {
   private apiUrl = 'http://127.0.0.1:5000';  
   constructor(private http: HttpClient) {}
     
-  getAnimals(): Observable<any[]> {
+  /*getAnimals(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/animals`);
+  }*/
+  getAnimals(animalType?: string): Observable<any[]> {
+    // Use HttpParams to include query parameters
+    let params = new HttpParams();
+    if (animalType) {
+      params = params.set('type', animalType);
+    }
+
+    return this.http.get<any[]>(`${this.apiUrl}/animals`, { params });
   }
 
   uploadPet(formData: any): Observable<any> {

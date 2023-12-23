@@ -1,4 +1,9 @@
 <button (click)="logout()">Logout</button>
+<div>
+    <button (click)="filterAnimals('dog')">Dogs</button>
+    <button (click)="filterAnimals('cat')">Cats</button>
+    <!-- Add buttons for other animal types as needed -->
+  </div>
 <div *ngFor="let animal of animals">
     <button (click)="addToFavorites(animal.id)">Add to Favorites</button>
     <h2>{{ animal.name }}</h2>
@@ -12,3 +17,5 @@
         </div>
     </a>
 </div>
+
+

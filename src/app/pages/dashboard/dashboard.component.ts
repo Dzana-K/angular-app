@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PetService } from '../../core/api/api/pet.service';
 import { AuthService } from '../../core/api/api/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   animals: any[] = [];
-  constructor(private petService: PetService, private authService: AuthService, private router: Router){}
+  selectedAnimalType: string | null = null;
+  constructor(private petService: PetService, private authService: AuthService, private router: Router, private route: ActivatedRoute){}
   private fetchAnimalData(): void {
     this.petService.getAnimals().subscribe(
       (animals) => {
@@ -25,7 +26,35 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetch initial animal data
-    this.fetchAnimalData();
+    
+    this.route.queryParams.subscribe(params => {
+      this.selectedAnimalType = params['type'] || null;
+      this.loadAnimals();
+    });
+  }
+  loadAnimals(): void {
+    console.log(this.selectedAnimalType)
+    this.petService.getAnimals(this.selectedAnimalType!).subscribe(
+      data => {
+        this.animals = data;
+        console.log(this.animals)
+      },
+      error => {
+        console.error('Error loading animals', error);
+      }
+    );
+  }
+  filterAnimals(animalType: string): void {
+    this.selectedAnimalType = animalType;
+
+    // Update URL with the filter parameter
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { type: animalType },
+      queryParamsHandling: 'merge'
+    });
+
+    this.loadAnimals();
   }
   logout(): void {
     this.authService.logout().subscribe(
@@ -41,6 +70,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+  
   addToFavorites(animalId: number): void {
     const data = { animal_id: animalId };
     this.petService.addFavorite(data).subscribe(

@@ -21,6 +21,7 @@ export class UploadComponent {
       description: [''],
       city: [''],
       country: [''],
+      type:[''],
       photos:[null]
      
     });
