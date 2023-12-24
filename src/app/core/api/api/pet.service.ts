@@ -12,13 +12,16 @@ export class PetService {
   /*getAnimals(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/animals`);
   }*/
-  getAnimals(animalType?: string): Observable<any[]> {
+  /*getAnimals(animalType?: string): Observable<any[]> {
     // Use HttpParams to include query parameters
     let params = new HttpParams();
     if (animalType) {
       params = params.set('type', animalType);
     }
 
+    return this.http.get<any[]>(`${this.apiUrl}/animals`, { params });
+  }*/
+  getAnimals(params: HttpParams): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/animals`, { params });
   }
 

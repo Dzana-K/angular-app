@@ -4,6 +4,9 @@
     <button (click)="filterAnimals('cat')">Cats</button>
     <!-- Add buttons for other animal types as needed -->
   </div>
+
+  <input type="text" placeholder="Search" [(ngModel)]="searchQuery" />
+<button (click)="searchAnimals()">Search</button>
 <div *ngFor="let animal of animals">
     <button (click)="addToFavorites(animal.id)">Add to Favorites</button>
     <h2>{{ animal.name }}</h2>
