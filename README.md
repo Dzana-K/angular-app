@@ -1,3 +1,17 @@
+# How to run  
+
+Make sure you have node and npm installed:  
+`node --version`  
+`npm --version`
+
+Then you have to install angular cli:  
+`npm install - g @angular/cli`
+
+And then simply run:
+`ng serve`
+
+
+
 # AngularApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
