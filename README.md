@@ -8,7 +8,9 @@ Then you have to install angular cli:
 `npm install - g @angular/cli`
 
 And then simply run:  
-`ng serve`
+`ng serve`  
+
+The application will be running on `http://localhost:4200/`  
 
 
 
