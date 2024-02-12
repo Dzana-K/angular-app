@@ -18,10 +18,16 @@ import { PetDetailModule } from './pages/pet-detail/pet-detail.module';
 import { FavoritesModule } from './pages/favorites/favorites.module';
 import { AdoptionPageModalModule } from './pages/adoption-page-modal/adoption-page-modal.module';
 import { UserInfoModule } from './pages/user-info/user-info.module';
+import { MaterialModule } from './material.module';
+import { SidebarModule } from './layout/sidebar/sidebar.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutComponent } from './layout/layout.component';
+import { LayoutRoutes } from './layout/layout.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LayoutComponent
 
   ],
   imports: [
@@ -38,7 +44,10 @@ import { UserInfoModule } from './pages/user-info/user-info.module';
     PetDetailModule,
     FavoritesModule,
     AdoptionPageModalModule,
-    UserInfoModule
+    UserInfoModule,
+    MaterialModule, 
+    SidebarModule, 
+    BrowserAnimationsModule
   ],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PetService } from '../../core/api/api/pet.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -10,7 +10,7 @@ import { PetService } from '../../core/api/api/pet.service';
 export class UploadComponent {
   petForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private petService: PetService) {
+  constructor(private fb: FormBuilder, private petService: PetService, private router: Router) {
     this.petForm = this.fb.group({
       name: [''],
       gender: [''],
@@ -66,6 +66,7 @@ export class UploadComponent {
     this.petService.uploadPet(formData).subscribe(
       (response) => {
         console.log(response);
+        this.router.navigate(['/dashboard']);
       },
       (error) => {
         console.error(error);

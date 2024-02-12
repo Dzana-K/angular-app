@@ -12,9 +12,12 @@ import { AdoptionPageModalComponent } from '../adoption-page-modal/adoption-page
 })
 export class PetDetailComponent implements OnInit {
   id!: number;
+  user:any;
+  favorites: any[] = [];
   animalDetails: any;
   authenticatedUserId!: number;
-  loadedUser!:string | null
+  loadedUser!:string | null;
+  is_favorite: boolean=false;
   constructor(private petService:PetService,
     private authService: AuthService,
               private route: ActivatedRoute,
@@ -32,26 +35,79 @@ export class PetDetailComponent implements OnInit {
       this.id = idParam ? +idParam : 0;
       this.loadAnimalDetails();
       
-      console.log(this.authenticatedUserId)
+      
+      
     }
     loadAnimalDetails(): void {
       this.petService.getAnimalDetails(this.id).subscribe(
         (data) => {
           this.animalDetails = data;
+          this.loadUserInfo(this.animalDetails.user_id);
           
-          console.log(this.animalDetails)
+          this.petService.getFavorites().subscribe(
+            (response) => {
+              this.favorites = response;
+              this.checkIfFavorite();
+
+            },
+            (error) => {
+              console.error('Error fetching favorites', error);
+            }
+          );
         },
         (error) => {
           console.error(error);
         }
       );
     }
+    loadUserInfo(user_id:number){
+      this.authService.getUser(user_id).subscribe(
+        (response)=>{
+          this.user=response;
+         
+          
+        },
+        (error)=>{
+          console.error('Error fetching user data', error);
+        }
+      )
+    }
+    removeFromFavorites(): void {
+      const data = { animal_id: this.id };
+      this.petService.deleteFavorite(this.id).subscribe(
+        () => {
+          
+          this.is_favorite = false; 
+          
+        },
+        (error) => {
+          console.error('Error removing animal from favorites', error);
+        }
+      );
+    }
+    checkIfFavorite(): void {
+      // Check if the current animal ID is in favorites
+      this.favorites.forEach((favorite) => {
+        
+        if (favorite.animal.id === this.id) {
+          this.is_favorite = true; 
+          
+          return; 
+        }
+      });}
+    toggleFavorite(): void {
+      if (this.is_favorite) {
+        this.removeFromFavorites();
+        
+      } else {
+        this.addToFavorites();
+      }}
     deletePost(animalId: number): void{
       const data = { animal_id: animalId };
-      console.log(data)
+      
       this.petService.deletePost(data.animal_id).subscribe(
         () => {
-          console.log('Animal deleted successfully');
+          
           this.router.navigate(['/dashboard']);
           
         },
@@ -63,7 +119,7 @@ export class PetDetailComponent implements OnInit {
     openAdoptionModal(): void {
       const dialogRef = this.dialog.open(AdoptionPageModalComponent, {
         width: '800px', // Adjust the width as needed
-        position: { top: '-50%', left: '25%' },
+       // position: { top: '-50%', left: '25%' },
         backdropClass: 'modal-backdrop',
         data: { id: this.id },
       });
@@ -73,5 +129,17 @@ export class PetDetailComponent implements OnInit {
         // Handle any actions after the modal is closed, if needed
       });
     }
-
+    addToFavorites(): void {
+      const data = { animal_id: this.id };
+      this.petService.addFavorite(data).subscribe(
+        () => {
+          
+          this.is_favorite=true;
+          // You can update the local list if needed
+        },
+        (error) => {
+          console.error('Error adding animal to favorites', error);
+        }
+      );
+    }
 }

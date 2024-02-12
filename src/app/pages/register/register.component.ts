@@ -13,8 +13,13 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   error:string | undefined;
   formData = {
-    username: '',
-    password: ''
+    email: '',
+    password: '',
+    first_name:'',
+    last_name:'',
+    address:'',
+    city:'',
+    country:''
   };
   @ViewChild(PlaceholderDirective, { static: false }) alertHost!: PlaceholderDirective; 
   private closeSub: Subscription = new Subscription;
@@ -32,6 +37,7 @@ export class RegisterComponent {
           response.refresh_token,
 
         );
+        this.authService.saveUserId(response.user_id);
         this.router.navigate(['/dashboard']);
         console.log('Register successful', response);
         // Handle success, e.g., redirect to another page

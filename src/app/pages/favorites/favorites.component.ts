@@ -19,15 +19,5 @@ export class FavoritesComponent implements OnInit {
       }
     );
   }
-  deleteFavorites(animalId: number): void{
-    this.petService.deleteFavorite(animalId).subscribe(
-      () => {
-        console.log('Animal deleted from favorites successfully');
-        this.favorites = this.favorites.filter(favorite => favorite.animal.id !== animalId);
-      },
-      (error) => {
-        console.error('Error deleting animal to favorites', error);
-      }
-    );
-  }
+ 
 }

@@ -6,7 +6,7 @@ import { Observable, catchError, throwError, switchMap, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:5000';  // Replace with your Flask API URL
+  private apiUrl = 'http://127.0.0.1:5000';  
 
   constructor(private http: HttpClient) {}
 
