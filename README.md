@@ -4,8 +4,12 @@ Make sure you have node and npm installed:
 `node --version`  
 `npm --version`
 
+
 Then you have to install angular cli:  
 `npm install - g @angular/cli`
+
+Install the packages:
+`npm install`  
 
 And then simply run:  
 `ng serve`  
