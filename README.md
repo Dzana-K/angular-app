@@ -5,6 +5,8 @@ The application enables users to search for and adopt pets, while also offering 
 
 ![image](https://github.com/Dzana-K/angular-app/assets/124843892/c416c560-a6bd-4afa-b5b7-08d8d71c4a65)
 
+![animal-detail](https://github.com/Dzana-K/angular-app/assets/124843892/acc7cf80-f784-4793-a2df-a22603719f6a)
+![upload-pet](https://github.com/Dzana-K/angular-app/assets/124843892/f48c3300-674a-4a79-8eb5-0cfe1d27db18)
 
 # How to run  
 
