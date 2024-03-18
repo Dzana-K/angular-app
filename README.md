@@ -1,3 +1,11 @@
+# PawAdopt
+This is the frontend of my pet adoption application. 
+
+The application enables users to search for and adopt pets, while also offering owners the ability put an animal up for adoption. If a user decides to adopt a pet, they can enter their information via a web form, which is then sent to the animal's owner via email. This allows the owner to contact the potential adopter and arrange the adoption details.
+
+![image](https://github.com/Dzana-K/angular-app/assets/124843892/c416c560-a6bd-4afa-b5b7-08d8d71c4a65)
+
+
 # How to run  
 
 Make sure you have node and npm installed:  
